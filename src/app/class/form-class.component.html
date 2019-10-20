@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Manage Class
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">{{title_header}}</h3>
+        </div>
+        <form [formGroup]="rForm" (ngSubmit)="addClass(rForm.value)" class="form-horizontal">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="class_name" class="col-sm-2 control-label">Class Name
+              </label>
+              <div class="col-sm-4">
+                <input type="text" formControlName="class_name" class="form-control" ngModel="{{getoneclasses.class_name}}" id="class_name" autocomplete="off">
+              </div>
+  
+              <div
+                *ngIf="rForm.controls['class_name'].invalid && (rForm.controls['class_name'].dirty || rForm.controls['class_name'].touched)"
+                class="col-sm-4 text-danger">
+  
+                <div *ngIf="rForm.controls['class_name'].errors.required">
+                  Enter your Class
+                </div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-9">
+                <button type="submit" class="btn btn-primary">{{title_button}}</button>
+                <a style="margin-left: 10px;" class="btn btn-danger" uiSref="app.class">Cancel</a>
+              </div>
+            </div>
+  
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>

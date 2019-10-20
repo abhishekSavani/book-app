@@ -1,0 +1,45 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Assign School
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Assign School Listing</h3>
+          <a uiSref="app.assign-school-add" style="float:right;width:auto;margin:0px 1px;"
+            class="btn btn-block btn-primary btn-flat">Add
+            Assign School</a>
+        </div>
+        <div class="box-body">
+          <div *ngIf="assignschools.length === 0">{{notfound}}</div>
+          <div *ngIf="assignschools.length > 0">
+              <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>School Name</th>
+                      <th>Class Name</th>
+                      <th>Book Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let assignschools_new of assignschools | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td>{{ assignschools_new.school_id.school_name }}</td>
+                      <td>{{ assignschools_new.class_id.class_name }}</td>
+                      <td>{{ assignschools_new.book_id.book_name }}</td>
+                      <td>
+                        <a style="text-decoration: none; color: blue;" uiSref="app.assign-school-update" [uiParams]="{ id : assignschools_new._id }" class="fa fa-edit"></a>
+                        <a style="margin-left: 10px; cursor: pointer; color: red;" class="fa fa-trash" (click)="deleteAssignSchool(assignschools_new._id)"></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+                <pagination-controls style="float: right;" (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>

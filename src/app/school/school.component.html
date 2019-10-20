@@ -1,0 +1,46 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Manage School
+    </h1>
+    <!-- <ol class="breadcrumb">
+      <li><a uiSref="app.home"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li class="active">User</li>
+    </ol> -->
+  </section>
+  <section class="content">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">School Listing</h3>
+        <a uiSref="app.school-add" style="float:right;width:auto;margin:0px 1px;"
+          class="btn btn-block btn-primary btn-flat">Add
+          School</a>
+      </div>
+      <div class="box-body">
+        <div *ngIf="school.length === 0">{{notfound}}</div>
+        <div *ngIf="school.length > 0">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>School</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let school_new of school | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <td>{{ school_new.school_name }}</td>
+                    <td>
+                      <a style="text-decoration: none; color: blue;" uiSref="app.school-update" [uiParams]="{ id : school_new._id }" class="fa fa-edit"></a>
+                      <a style="margin-left: 10px; cursor: pointer; color: red;" class="fa fa-trash" (click)="deleteSchool(school_new._id)"></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <pagination-controls style="float: right;" (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+    </div>
+  </section>
+</div>

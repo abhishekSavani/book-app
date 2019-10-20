@@ -1,0 +1,47 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Manage Book
+    </h1>
+  </section>
+  <section class="content">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Book Listing</h3>
+        <a uiSref="app.subject-add" style="float:right;width:auto;margin:0px 1px;"
+          class="btn btn-block btn-primary btn-flat">Add
+          Book</a>
+      </div>
+      <div class="box-body">
+        <div *ngIf="subjects.length === 0">{{notfound}}</div>
+        <div *ngIf="subjects.length > 0">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Book Name</th>
+                    <th>Book Price</th>
+                    <th>Book Quantity</th>
+                    <th>Book Point</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let subjects_new of subjects | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <td>{{ subjects_new.book_name }}</td>
+                    <td>{{ subjects_new.book_price }}</td>
+                    <td>{{ subjects_new.book_quantity }}</td>
+                    <td>{{ subjects_new.book_points }}</td>
+                    <td>
+                      <a style="text-decoration: none; color: blue;" uiSref="app.subject-update" [uiParams]="{ id : subjects_new._id }" class="fa fa-edit"></a>
+                      <a style="margin-left: 10px; cursor: pointer; color: red;" class="fa fa-trash" (click)="deleteSubject(subjects_new._id)"></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <pagination-controls style="float: right;" (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,94 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Manage Books
+    </h1>
+  </section>
+  <section class="content">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">{{title_header}}</h3>
+      </div>
+      <form [formGroup]="rForm" (ngSubmit)="addSubject(rForm.value)" class="form-horizontal">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="book_name" class="col-sm-2 control-label">Book Name
+            </label>
+            <div class="col-sm-4">
+              <input type="text" formControlName="book_name" class="form-control" id="book_name" autocomplete="off" ngModel="{{getonesubject.book_name}}">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['book_name'].invalid && (rForm.controls['book_name'].dirty || rForm.controls['book_name'].touched)"
+              class="col-sm-4 text-danger">
+
+              <div *ngIf="rForm.controls['book_name'].errors.required">
+                Enter Book Name
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="book_price" class="col-sm-2 control-label">Book Price
+            </label>
+            <div class="col-sm-4">
+              <input type="text" formControlName="book_price" class="form-control" id="book_price" autocomplete="off" ngModel="{{getonesubject.book_price}}">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['book_price'].invalid && (rForm.controls['book_price'].dirty || rForm.controls['book_price'].touched)"
+              class="col-sm-4 text-danger">
+
+              <div *ngIf="rForm.controls['book_price'].errors.required">
+                Enter Book Price
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="book_quantity" class="col-sm-2 control-label">Book Quantity
+            </label>
+            <div class="col-sm-4">
+              <input type="text" formControlName="book_quantity" class="form-control" id="book_quantity" autocomplete="off" ngModel="{{getonesubject.book_quantity}}">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['book_quantity'].invalid && (rForm.controls['book_quantity'].dirty || rForm.controls['book_quantity'].touched)"
+              class="col-sm-4 text-danger">
+
+              <div *ngIf="rForm.controls['book_quantity'].errors.required">
+                Enter Book Quantity
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="book_points" class="col-sm-2 control-label">Book Point
+            </label>
+            <div class="col-sm-4">
+              <input type="text" formControlName="book_points" class="form-control" id="book_points" autocomplete="off" ngModel="{{getonesubject.book_points}}">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['book_points'].invalid && (rForm.controls['book_points'].dirty || rForm.controls['book_points'].touched)"
+              class="col-sm-4 text-danger">
+
+              <div *ngIf="rForm.controls['book_points'].errors.required">
+                Enter Book Points
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-9">
+              <button type="submit" class="btn btn-primary">{{title_button}}</button>
+              <a style="margin-left: 10px;" class="btn btn-danger" uiSref="app.subject">Cancel</a>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

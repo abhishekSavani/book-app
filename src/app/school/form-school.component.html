@@ -1,0 +1,154 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Manage School
+    </h1>
+  </section>
+  <section class="content">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">{{title_header}}</h3>
+      </div>
+      <form [formGroup]="rForm" (ngSubmit)="addSchool(rForm.value)" class="form-horizontal">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="school_name" class="col-sm-2 control-label">School/Institute
+            </label>
+            <div class="col-sm-6">
+              <input type="text" formControlName="school_name" ngModel="{{getoneschool.school_name}}" class="form-control" id="school_name" autocomplete="off">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['school_name'].invalid && (rForm.controls['school_name'].dirty || rForm.controls['school_name'].touched)"
+              class="col-sm-4 text-danger" style="margin-top: 10px; text-align: center;">
+
+              <div *ngIf="rForm.controls['school_name'].errors.required">
+                Enter your School/Institute
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="school_mobile_number" class="col-sm-2 control-label">Mobile Number
+            </label>
+            <div class="col-sm-6">
+              <input type="text" formControlName="school_mobile_number" ngModel="{{getoneschool.school_mobile_number}}" class="form-control" id="school_mobile_number" autocomplete="off" maxlength="10">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['school_mobile_number'].invalid && (rForm.controls['school_mobile_number'].dirty || rForm.controls['school_mobile_number'].touched)"
+              class="col-sm-4 text-danger" style="margin-top: 10px; text-align: center;">
+
+              <div *ngIf="rForm.controls['school_mobile_number'].errors.required">
+                Enter Mobile Number
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address" class="col-sm-2 control-label">Address
+            </label>
+            <div class="col-sm-6">
+              <textarea type="text" formControlName="address" ngModel="{{getoneschool.address}}" class="form-control" id="address" autocomplete="off"></textarea>
+            </div>
+
+            <div
+              *ngIf="rForm.controls['address'].invalid && (rForm.controls['address'].dirty || rForm.controls['address'].touched)"
+              class="col-sm-4 text-danger" style="margin-top: 10px; text-align: center;">
+
+              <div *ngIf="rForm.controls['address'].errors.required">
+                Enter your Address
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pincode" class="col-sm-2 control-label">Pincode
+            </label>
+            <div class="col-sm-6">
+              <input type="pincode" maxlength="6" formControlName="pincode" ngModel="{{getoneschool.pincode}}" class="form-control" id="pincode" autocomplete="off">
+            </div>
+
+            <div
+              *ngIf="rForm.controls['pincode'].invalid && (rForm.controls['pincode'].dirty || rForm.controls['pincode'].touched)"
+              class="col-sm-4 text-danger" style="margin-top: 10px; text-align: center;">
+
+              <div *ngIf="rForm.controls['pincode'].errors.required">
+                Enter your Pincode
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="rewards_type" class="col-sm-2 control-label">Rewards</label>
+            <div class="col-sm-6">
+              <input type="radio" formControlName="rewards_type" value="For School" ngModel="{{getoneschool.rewards_type}}">
+              For School
+              <input type="radio" formControlName="rewards_type" value="For Student" ngModel="{{getoneschool.rewards_type}}">
+              For Student
+              <br>
+            </div>
+
+            <div
+              *ngIf="rForm.controls['rewards_type'].invalid && (rForm.controls['rewards_type'].dirty || rForm.controls['rewards_type'].touched)"
+              class="text-danger">
+              <div *ngIf="rForm.controls['rewards_type'].errors?.required">
+                Select Rewards
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="router.stateService.params.id">
+            <label for="school_logo" class="col-sm-2 control-label">School Logo</label>
+            <div class="col-sm-4">
+              <input type="file" class="form-control" id="school_logo" formControlName="school_logo">
+              <!-- <input type="hidden" class="form-control" id="profile_image_hidden" formControlName="profile_image"
+                ngModel={{users.profile_image}}> -->
+              <input type="hidden" class="form-control" id="school_logo_old" formControlName="school_logo_old"
+                ngModel={{getoneschool.school_logo}}>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="!router.stateService.params.id">
+            <label for="school_logo" class="col-sm-2 control-label">School Logo</label>
+            <div class="col-sm-4">
+              <input type="file" class="form-control" formControlName="school_logo" id="school_logo" />
+            </div>
+          </div>
+          
+          <!-- <div class="form-group">
+            <label for="standard_class" class="col-sm-2 control-label">
+              Class
+            </label>
+            <div class="col-sm-6">
+                  <label class="checkbox-inline" *ngFor="let standard_class_new of standard_class" style="margin: 0px 10px 0px 0px;">
+                    <input type="checkbox" value="{{standard_class_new._id}}" formControlName="standard_class" (change)="getSubjects();" id="class_sub"> {{standard_class_new.class_name}}
+                  </label>
+            </div>
+          </div>
+
+          <div *ngIf="getsubtrue">
+            <div style="margin-bottom: 10px;" *ngFor="let getsubjects_new of getsubjects; let i = index">
+                <label for="subjects" class="col-sm-2 control-label">Class {{getsubjects_new.class_name}} Subjects
+                  </label>
+                  <div class="col-sm-4">
+                    <select class="form-control" formControlName="subjects" multiple (change)="setsubjects($event.target.value, getsubjects_new.class_id, i)" id="sub" ngModel>
+                      <option *ngFor="let getsubjects_new_new of getsubjects_new.subjects; let j = index" value="{{getsubjects_new_new.id}}">{{getsubjects_new_new.subject_name}}</option>
+                    </select>
+                  </div>
+            </div>
+          </div> -->
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-9">
+              <button type="submit" class="btn btn-primary">{{title_button}}</button>
+              <a class="btn btn-danger" uiSref="app.school">Cancel</a>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

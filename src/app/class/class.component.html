@@ -1,0 +1,41 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Manage Class
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Class Listing</h3>
+          <a uiSref="app.class-add" style="float:right;width:auto;margin:0px 1px;"
+            class="btn btn-block btn-primary btn-flat">Add
+            Class</a>
+        </div>
+        <div class="box-body">
+            <div *ngIf="class.length === 0">{{notfound}}</div>
+            <div *ngIf="class.length > 0">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Class Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let class_new of class | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td>{{ class_new.class_name }}</td>
+                        <td>
+                          <a style="text-decoration: none; color: blue;" uiSref="app.class-update" [uiParams]="{ id : class_new._id }" class="fa fa-edit"></a>
+                          <a style="margin-left: 10px; cursor: pointer; color: red;" class="fa fa-trash" (click)="deleteUser(class_new._id)"></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br>
+                  <pagination-controls style="float: right;" (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
